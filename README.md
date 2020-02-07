@@ -1,7 +1,8 @@
 # Password-Generator
 JavaScript Password Generator 
 *****************************
-This JavaScript App lets you generate random passwords with length betwwen 8-128 characters. You can customize the character set.
+This JavaScript App lets you generate random passwords with length betewen 8-128 characters.
+You can also customize the character set.
 
 ## Web Building Tools:
 HTML5 - CSS3 - Javascript
