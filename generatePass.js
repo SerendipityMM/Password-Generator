@@ -1,73 +1,63 @@
-// Assignment Code
-var generateBtn = document.querySelector("#generate");
-// Alert a Welcome Message
-alert("Welcome to your Password Generator!");
-// Prompt the User
-var lengthPass = prompt("Please enter the length of your new password , which must be between 8-128 characters long:")
-var symbolsInput = confirm("Would you like to include special characters?");
-var numbersInput = confirm("Would you like to include Numbers?");
-var lowercaseInput = confirm("Would you like to include Lowercase letters?");
-var uppercaseInput = confirm("Would you like to include Uppercase letters?");
 
-window.onload = function (){
-  var generateBtn = document.querySelector('#generate');
-  generateBtn.addEventListener('click', function(){				
-    document.querySelector('#password').value = generate();
-  });
+function generatePass() {
+
+  var passLength = prompt("How many characters do you want to use to create your password? Choose between 8 - 128");
+
+  //if the user do not enter a character, or length is less than 8 or more than 128 
+  if (passLength === "" || passLength < 8 || passLength > 128) {
+    alert ("Character length must be between 8 and 128");
+  }
+
+  else {
+
+  var addNumbers = confirm("Include numbers?");
+  var addUpperCase = confirm("Include uppercase characters?");
+  var addLowerCase = confirm("Include lowercase characters?");
+  var addSpecial = confirm("Include special characters?");
+
+  //Variables for each type of characters, that the user can add
+  var stringNumbers = "0123456789";
+  var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  var lowercase = "abcdefghijklmnopqrstuvwxyz";
+  var stringSpecial = "!#$%&'()*+,-./:;<=>?@[]\^_`{|}~";
+
+  var newPassword = "";
+  var newString = "";
+
+    if (addSpecial) {
+      newString += stringSpecial;
+    }
+    
+    if (addNumbers) {
+      newString += stringNumbers;
+    }
+      
+    if (addUpperCase) {
+      newString += uppercase;
+    }
+        
+    if (addLowerCase) {
+      newString += lowercase;
+    }
+  
+  }
+
+  for (var i = 0; i < passLength; i++) {
+
+  newPassword = newPassword + newString.charAt(Math.floor(Math.random() * Math.floor(newString.length))); 
+
+  }
+  document.getElementById("password").value = newPassword;
+
 }
 
-
-// Generator Functions 
-function generate( length=lengthPass ){
-   var uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-   var lowercase = 'abcdefghijklmnopqrstuvwxyz';
-   var numbers = '0123456789';
-   var symbols = '!"#$%&\'()*+,-./:;<=>?@^[\\]^_`{|}~';
-
-   var all = uppercase + lowercase + numbers + symbols;
-
-   var password = '';
-
-   if (all === 0) {
-     return '';
-   }
-
-   for (var i = 0; i < length; i++) {
-       var character = Math.floor(Math.random() * all.length);
-       password += all.substring(character, character + 1);
-   }
-
-   return password;
-}
-
-
-
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword(symbolsInput,numbersInput,lowercaseInput,uppercaseInput,lengthPass);
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
-
-  copyBtn.removeAttribute("disabled");
-  copyBtn.focus();
-}
-
-
-
+//Select and copy text
 function copyToClipboard() {
-// Copy the text received
-  var copyText = document.getElementById("password");
+    
+    var copyText = document.getElementById("password");
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
 
- 
-  copyText.select();
-  copyText.setSelectionRange(0, 99999); /*For mobile devices*/
-
-  /* Copy the text inside the text field */
-  document.execCommand("copy");
-
-  /* Alert the copied text */
-  alert("Copied the text: " + copyText.value);
-}
-
-
+    document.getElementById("password").value = "Password copied to clipboard"
+  
+  }
